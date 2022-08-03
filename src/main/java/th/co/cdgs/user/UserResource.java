@@ -104,7 +104,7 @@ public class UserResource {
         final List<InputPart> files = multipart.get("files");
         for (final InputPart inputPart : files) {
             final java.nio.file.Path tempFile = inputPart.getBody(File.class, null).toPath();
-            final java.nio.file.Path file = Paths.get("C:/Users/qme/Documents/eclipse-workspace/online-quiz/src/main/assets/images/" + fileName);
+            final java.nio.file.Path file = Paths.get("src/main/assets/images/" + fileName);
             if (Files.exists(file)) {
                 Files.delete(file);
             }
@@ -116,12 +116,12 @@ public class UserResource {
     @GET
     @Path("image/{fileName}")
     public Response readFile(@PathParam(value = "fileName") String fileName) throws Exception {
-        final java.nio.file.Path file = Paths.get("C:/Users/qme/Documents/eclipse-workspace/online-quiz/src/main/assets/images/" + fileName);
+        final java.nio.file.Path file = Paths.get("src/main/assets/images/" + fileName);
         if (Files.exists(file)) {
-             final StreamingOutput stream = (OutputStream output) -> Files.copy(file, output);
+            final StreamingOutput stream = (OutputStream output) -> Files.copy(file, output);
             return Response.ok(stream)
                     .header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
-                    .header(HttpHeaders.CONTENT_DISPOSITION, fileName).build();
+                    .build();
         }
         return Response.noContent().build();
     }
