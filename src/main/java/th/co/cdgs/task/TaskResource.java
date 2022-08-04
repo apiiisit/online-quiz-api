@@ -14,6 +14,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -35,6 +36,15 @@ public class TaskResource {
     @GET
     public List<Task> get() {
         return entityManager.createQuery("FROM Task", Task.class).getResultList();
+    }
+    
+    @GET
+    @Path("check")
+    public List<Task> getUserDoQuiz(@QueryParam("uid") Integer userId, @QueryParam("qid") Integer quizId) {
+        return entityManager.createQuery("FROM Task t WHERE t.user.userId = :uId AND t.quiz.quizId = :qId", Task.class)
+        		.setParameter("uId", userId)
+        		.setParameter("qId", quizId)
+        		.getResultList();
     }
     
     @POST
