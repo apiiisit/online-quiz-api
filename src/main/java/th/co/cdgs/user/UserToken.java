@@ -4,6 +4,7 @@ public class UserToken {
 
 	private Integer userId;
 	private String userName;
+	private String profile;
 	private String token;
 	
 	public Integer getUserId() {
@@ -17,6 +18,12 @@ public class UserToken {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 	public String getToken() {
 		return token;

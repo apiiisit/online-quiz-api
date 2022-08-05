@@ -193,22 +193,25 @@ public class UserResource {
     @GET
     @Path("auth")
     public Response login(@QueryParam("username") String username, @QueryParam("password") String password) throws NoSuchAlgorithmException {
-    	List<User> entity = entityManager.createQuery("FROM User WHERE userName = :username", User.class)
+    	User entity = entityManager.createQuery("FROM User WHERE userName = :username", User.class)
     			.setParameter("username", username)
-    			.getResultList();
-    	if (entity.isEmpty() || !checkPassword(password, entity.get(0).getPassword())) {
-    		throw new WebApplicationException("user with username of " + username + " does not exist.");
+    			.getSingleResult();
+   	
+    	if (checkPassword(password, entity.getPassword())) {
+    		byte[] h = Base64.getEncoder().encode(("online-" + new Date()).getBytes());
+	    	byte[] t = Base64.getEncoder().encode(("-quiz" + new Date()).getBytes());
+	    	byte[] token = Base64.getEncoder().encode((entity.getUserId().toString() +','+ entity.getUserName() +','+ entity.getUserRole().getUserRoleName()).getBytes());
+	    	
+	    	UserToken user = new UserToken();
+	    	user.setUserId(entity.getUserId());
+	    	user.setUserName(entity.getUserName());
+	    	user.setProfile(entity.getProfile());
+	    	user.setToken((new String(h) +"."+ new String(token) +"."+ new String(t)).replaceAll("=", ""));
+	    	return Response.ok(user).build();
+    	} else {
+    		throw new WebApplicationException("Username or password is incorrect.");
     	}
-    	byte[] h = Base64.getEncoder().encode(("online-" + new Date()).getBytes());
-    	byte[] t = Base64.getEncoder().encode(("-quiz" + new Date()).getBytes());
-    	byte[] token = Base64.getEncoder().encode((entity.get(0).getUserId().toString() +','+ entity.get(0).getUserName() +','+ entity.get(0).getUserRole().getUserRoleName()).getBytes());
     	
-    	UserToken user = new UserToken();
-    	user.setUserId(entity.get(0).getUserId());
-    	user.setUserName(entity.get(0).getUserName());
-    	user.setToken((new String(h) +"."+ new String(token) +"."+ new String(t)).replaceAll("=", ""));
-    	
-    	return Response.ok(user).build();
     }
     
     private String encodePassword(String password)
