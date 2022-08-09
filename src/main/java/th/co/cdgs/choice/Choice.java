@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import th.co.cdgs.choice.correct.ChoiceCorrect;
 import th.co.cdgs.question.Question;
 
 
@@ -26,11 +27,12 @@ public class Choice {
     @Column(name = "choice_id")
 	private Integer choiceId;
 	
-	@Column(name = "choice_name", length = 100)
+	@Column(name = "choice_name")
 	private String choiceName;
 	
-	@Column(name = "choice_correct")
-	private Boolean choiceCorrect;
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "choice_correct_id")
+	private ChoiceCorrect choiceCorrect;
 	
 	@Column(name = "create_time")
 	private Date createTime;
@@ -57,12 +59,12 @@ public class Choice {
 	public void setChoiceName(String choiceName) {
 		this.choiceName = choiceName;
 	}
-
-	public Boolean getChoiceCorrect() {
+	
+	public ChoiceCorrect getChoiceCorrect() {
 		return choiceCorrect;
 	}
 
-	public void setChoiceCorrect(Boolean choiceCorrect) {
+	public void setChoiceCorrect(ChoiceCorrect choiceCorrect) {
 		this.choiceCorrect = choiceCorrect;
 	}
 

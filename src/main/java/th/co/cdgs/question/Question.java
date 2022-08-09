@@ -31,7 +31,7 @@ public class Question {
 	@Column(name = "question_id")
 	private Integer questionId;
 
-	@Column(name = "question_name", length = 100)
+	@Column(name = "question_name")
 	private String questionName;
 
 	@Column(name = "question_type", length = 1)
