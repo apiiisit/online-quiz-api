@@ -31,12 +31,9 @@ public class Choice {
 	
 	@Column(name = "choice_name")
 	private String choiceName;
-
-	@OneToOne(
-			mappedBy = "choice",
-			cascade = CascadeType.ALL,
-			orphanRemoval = true
-    )
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "choice_correct_id")
 	private ChoiceCorrect choiceCorrect;
 	
 	@Column(name = "create_time")
@@ -64,6 +61,14 @@ public class Choice {
 	public void setChoiceName(String choiceName) {
 		this.choiceName = choiceName;
 	}
+	
+	public ChoiceCorrect getChoiceCorrect() {
+		return choiceCorrect;
+	}
+
+	public void setChoiceCorrect(ChoiceCorrect choiceCorrect) {
+		this.choiceCorrect = choiceCorrect;
+	}
 
 	public Date getCreateTime() {
 		return createTime;
@@ -81,28 +86,13 @@ public class Choice {
 		this.updateTime = updateTime;
 	}
 
-	public void setQuestion(Question question) {
-		this.question = question;
-	}
-
 	public Question GetQuestion() {
 		return question;
 	}
 
-	public void setChoiceCorrect(ChoiceCorrect choiceCorrect) {
-		this.choiceCorrect = choiceCorrect;
+	public void setQuestion(Question question) {
+		this.question = question;
 	}
+
 	
-	public void setChoiceCorrectCheck(Boolean check) {
-		this.choiceCorrect.setChoiceCorrectCheck(check);
-	}
-
-	public ChoiceCorrect GetChoiceCorrect() {
-		return choiceCorrect;
-	}
-
-	public void removeChoice(Choice choice) {
-		this.choiceCorrect = null;
-		choice.setQuestion(null);
-	}
 }

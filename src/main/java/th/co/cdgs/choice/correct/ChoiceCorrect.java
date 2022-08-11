@@ -24,10 +24,6 @@ public class ChoiceCorrect {
 	
 	@Column(name = "choice_correct_check")
 	private Boolean choiceCorrectCheck;
-	
-	@OneToOne()
-    @JoinColumn(name = "choice_id")
-	private Choice choice;
 
 	public Integer getChoiceCorrectId() {
 		return choiceCorrectId;
@@ -43,14 +39,6 @@ public class ChoiceCorrect {
 
 	public void setChoiceCorrectCheck(Boolean choiceCorrectCheck) {
 		this.choiceCorrectCheck = choiceCorrectCheck;
-	}
-
-	public Choice getChoice() {
-		return choice;
-	}
-
-	public void setChoice(Choice choice) {
-		this.choice = choice;
 	}
 	
 	

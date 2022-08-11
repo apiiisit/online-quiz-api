@@ -43,14 +43,7 @@ public class QuestionResource {
         return entityManager.createQuery("FROM Question", Question.class).getResultList();
     }
     
-    @GET
-	@Path("{id}")
-	public List<Question> getById(@PathParam("id") Integer id) {
-		return entityManager.createQuery("FROM Question q WHERE q.quiz.quizId = :id", Question.class)
-				.setParameter("id", id)
-				.getResultList();
-	}
-    
+
     @GET
     @Path("question")
 	public List<Question> getRandom(@QueryParam("quiz") Integer quiz, @QueryParam("limit") Integer limit,  @QueryParam("time") Integer time) {
@@ -74,23 +67,54 @@ public class QuestionResource {
     		q_time -= (Integer)object[1];
     		q_id.add((Integer)object[0]);
     	}
-    	return entityManager.createQuery("FROM Question q WHERE q.questionId IN (:id) ORDER BY RANDOM()", Question.class)
+    	List<Question> entitys = entityManager.createQuery("FROM Question q WHERE q.questionId IN (:id) ORDER BY RANDOM()", Question.class)
     			.setParameter("id", q_id)
     			.getResultList();
+    	for (Question entity : entitys) {
+      	  for (Choice choice : entity.getChoiceArr() ) {
+      		  choice.setChoiceCorrect(null);
+      	  }
+        }
+        return entitys;
 	}
     
     @POST
     @Transactional
     public Response create(Question question) {
-        if (question.getQuestionId() != null) {
-        	question.setQuestionId(null);
+        Question questions = new Question();
+        
+        Date time = new Date();
+        
+        questions.setQuiz(question.getQuiz());
+        questions.setQuestionName(question.getQuestionName());
+        questions.setQuestionType(question.getQuestionType());
+        questions.setQuestionTime(question.getQuestionTime());
+        questions.setCreateTime(time);
+        questions.setUpdateTime(time);
+        
+        Integer verifyCount = 0;
+        
+        for (Choice choice : question.getChoiceArr()) {
+        	if (choice.getChoiceCorrect().getChoiceCorrectCheck()) {
+        		verifyCount += 1;
+        	}
+        	createChoice(questions, choice);
         }
-        question.setCreateTime(new Date());
-        question.setUpdateTime(new Date());
-        entityManager.persist(question);
-        return Response.status(Status.CREATED).entity(question).build();
+        Boolean verified = (question.getQuestionType().equals("S") && verifyCount == 1) || (question.getQuestionType().equals("M") && verifyCount >= 2);
+        questions.setVerified(verified);
+        entityManager.persist(questions);
+        return Response.status(Status.CREATED).entity(questions).build();
     }
-	
+    
+    private void createChoice(Question questions,  Choice choices) {
+    	Date time = new Date();
+    	choices.setQuestion(questions);
+    	choices.setChoiceName(choices.getChoiceName());
+    	choices.setCreateTime(time);
+    	choices.setUpdateTime(time);
+    	entityManager.persist(choices);
+    }
+    
 	@PUT
     @Path("{id}")
     @Transactional
@@ -107,8 +131,26 @@ public class QuestionResource {
         entity.setQuiz(question.getQuiz());
         entity.setUpdateTime(new Date());
         
+        Integer verifyCount = 0;
+        
+        for (Choice choice : question.getChoiceArr()) {
+        	if (choice.getChoiceCorrect().getChoiceCorrectCheck()) {
+        		verifyCount += 1;
+        	}
+        	editChoice(choice);
+        }
+        Boolean verified = (question.getQuestionType().equals("S") && verifyCount == 1) || (question.getQuestionType().equals("M") && verifyCount >= 2);
+        entity.setVerified(verified);
+        
         return Response.ok(entity).build();
     }
+	
+	private void editChoice(Choice choice) {
+		Choice entity = entityManager.find(Choice.class, choice.getChoiceId());
+		entity.setChoiceCorrect(choice.getChoiceCorrect());
+		entity.setChoiceName(choice.getChoiceName());
+		entity.setUpdateTime(new Date());
+	}
 	
 	@DELETE
     @Path("{id}")
