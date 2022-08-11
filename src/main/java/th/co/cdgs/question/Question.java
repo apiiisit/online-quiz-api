@@ -137,15 +137,4 @@ public class Question {
 		this.choiceArr = choiceArr;
 	}
 
-	public void addChoice(Choice choice) {
-		this.choiceArr.add(choice);
-		choice.setQuestion(this);
-	}
-
-	public void removeChoice(Choice choice) {
-		this.choiceArr.remove(choice);
-		choice.setQuestion(null);
-	}
-
-
 }

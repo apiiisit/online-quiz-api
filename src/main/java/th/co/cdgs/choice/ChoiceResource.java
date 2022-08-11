@@ -19,6 +19,8 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import th.co.cdgs.choice.correct.ChoiceCorrect;
+
 
 @Path("choice")
 @ApplicationScoped
@@ -32,25 +34,30 @@ public class ChoiceResource {
 	public ChoiceResource(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
-	
 
-    @GET
-    public List<Choice> get() {
-        return entityManager.createQuery("FROM Choice", Choice.class).getResultList();
-    }
-    
     @POST
     @Transactional
     public Response create(Choice choice) {
+        Choice newChoice = new Choice();
+        ChoiceCorrect newCorrect = new ChoiceCorrect();
+        
         if (choice.getChoiceId() != null) {
-        	choice.setChoiceId(null);
+        	newChoice.setChoiceId(null);
         }
-        choice.setCreateTime(new Date());
-        choice.setUpdateTime(new Date());
-        entityManager.persist(choice);
-        return Response.status(Status.CREATED).entity(choice).build();
+        
+        newChoice.setChoiceName(choice.getChoiceName());
+        newChoice.setQuestion(choice.GetQuestion());
+        newChoice.setCreateTime(new Date());
+        newChoice.setUpdateTime(new Date());
+        
+        newCorrect.setChoice(newChoice);
+        newCorrect.setChoiceCorrectCheck(choice.GetChoiceCorrect().getChoiceCorrectCheck());
+        
+        entityManager.persist(newChoice);
+        entityManager.persist(newCorrect);
+        return Response.status(Status.CREATED).entity(newCorrect).build();
     }
-	
+    
 	@PUT
     @Path("{id}")
     @Transactional
@@ -62,7 +69,7 @@ public class ChoiceResource {
         }
         
         entity.setChoiceName(choice.getChoiceName());
-        entity.setChoiceCorrect(choice.getChoiceCorrect());
+        entity.setChoiceCorrectCheck(choice.GetChoiceCorrect().getChoiceCorrectCheck());
         entity.setUpdateTime(new Date());
        
         return Response.ok(entity).build();
@@ -77,8 +84,9 @@ public class ChoiceResource {
             throw new WebApplicationException("choice with id of " + id + " does not exist.",
                     Status.NOT_FOUND);
         }
-        entity.setQuestion(null);
+        entity.removeChoice(entity);
         entityManager.remove(entity);
+        
         return Response.ok().build();
     }
     

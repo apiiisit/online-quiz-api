@@ -30,78 +30,126 @@ VALUES (1, 'Math 1', null, 50, 5, sysdate, sysdate, true, 123456, sysdate, sysda
 INSERT INTO quiz (quiz_id, quiz_name, quiz_description, quiz_pass, number_of_question, quiz_start, quiz_end, quiz_active, quiz_password, create_time, update_time, category_id)
 VALUES (2, 'Mobile 1', null, 50, 5, sysdate, sysdate, true, 123456, sysdate, sysdate, 2);
 
--- choice_correct
-INSERT INTO choice_correct (choice_correct_id, choice_correct_check)
-VALUES (0, false);
-
-INSERT INTO choice_correct (choice_correct_id, choice_correct_check)
-VALUES (1, true);
-
 
 -- question
 INSERT INTO question (question_id, question_name, question_type, question_time, create_time, update_time, quiz_id)
 VALUES (1, '1+1=?', 'S', 15, sysdate, sysdate, 1);
 
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (1, '1', 0, sysdate, sysdate, 1);
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (2, '2', 1, sysdate, sysdate, 1);
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (3, '3', 0, sysdate, sysdate, 1);
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (4, '4', 0, sysdate, sysdate, 1);
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (1, '1', sysdate, sysdate, 1);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (1, false, 1);
+
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (2, '2', sysdate, sysdate, 1);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (2, true, 2);
+
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (3, '3', sysdate, sysdate, 1);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (3, false, 3);
+
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (4, '4', sysdate, sysdate, 1);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (4, false, 4);
 
 -- question
 INSERT INTO question (question_id, question_name, question_type, question_time, create_time, update_time, quiz_id)
 VALUES (2, '?+?=69', 'M', 15, sysdate, sysdate, 1);
 
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (5, '34+35', 1, sysdate, sysdate, 2);
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (6, '32+37', 1, sysdate, sysdate, 2);
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (7, '34+34', 0, sysdate, sysdate, 2);
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (8, '69+1', 0, sysdate, sysdate, 2);
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (5, '34+35', sysdate, sysdate, 2);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (5, true, 5);
+
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (6, '32+37', sysdate, sysdate, 2);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (6, true, 6);
+
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (7, '34+34', sysdate, sysdate, 2);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (7, false, 7);
+
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (8, '69+1', sysdate, sysdate, 2);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (8, false, 8);
 
 -- question
 INSERT INTO question (question_id, question_name, question_type, question_time, create_time, update_time, quiz_id)
 VALUES (3, '2+2=?', 'S', 15, sysdate, sysdate, 1);
 
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (9, '4', 1, sysdate, sysdate, 3);
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (10, '6', 0, sysdate, sysdate, 3);
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (11, '-2', 0, sysdate, sysdate, 3);
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (12, '2', 0, sysdate, sysdate, 3);
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (9, '4', sysdate, sysdate, 3);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (9, true, 9);
+
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (10, '6', sysdate, sysdate, 3);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (10, false, 10);
+
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (11, '-2', sysdate, sysdate, 3);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (11, false, 11);
+
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (12, '2', sysdate, sysdate, 3);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (12, false, 12);
 
 -- question
 INSERT INTO question (question_id, question_name, question_type, question_time, create_time, update_time, quiz_id)
 VALUES (4, '5-5=?', 'S', 15, sysdate, sysdate, 1);
 
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (13, '0', 1, sysdate, sysdate, 4);
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (14, '5', 0, sysdate, sysdate, 4);
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (15, '-5', 0, sysdate, sysdate, 4);
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (16, '10', 0, sysdate, sysdate, 4);
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (13, '0', sysdate, sysdate, 4);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (13, true, 13);
+
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (14, '5', sysdate, sysdate, 4);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (14, false, 14);
+
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (15, '-5', sysdate, sysdate, 4);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (15, false, 15);
+
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (16, '10', sysdate, sysdate, 4);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (16, false, 16);
 
 -- question
 INSERT INTO question (question_id, question_name, question_type, question_time, create_time, update_time, quiz_id)
 VALUES (5, '18-?=10', 'S', 15, sysdate, sysdate, 1);
 
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (17, '8', 1, sysdate, sysdate, 5);
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (18, '10', 0, sysdate, sysdate, 5);
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (19, '18', 0, sysdate, sysdate, 5);
-INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, update_time, question_id)
-VALUES (20, '12', 0, sysdate, sysdate, 5);
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (17, '8', sysdate, sysdate, 5);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (17, true, 17);
+
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (18, '10', sysdate, sysdate, 5);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (18, false, 18);
+
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (19, '18', sysdate, sysdate, 5);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (19, false, 19);
+
+INSERT INTO choice (choice_id, choice_name, create_time, update_time, question_id)
+VALUES (20, '12', sysdate, sysdate, 5);
+INSERT INTO choice_correct (choice_correct_id, choice_correct_check, choice_id)
+VALUES (20, false, 20);
 
 -- task
 --INSERT INTO task (task_id, task_status, task_score, task_start, task_finish, quiz_user_id, quiz_id)

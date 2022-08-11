@@ -2,6 +2,7 @@ package th.co.cdgs.choice;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -29,9 +31,12 @@ public class Choice {
 	
 	@Column(name = "choice_name")
 	private String choiceName;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "choice_correct_id")
+
+	@OneToOne(
+			mappedBy = "choice",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true
+    )
 	private ChoiceCorrect choiceCorrect;
 	
 	@Column(name = "create_time")
@@ -59,14 +64,6 @@ public class Choice {
 	public void setChoiceName(String choiceName) {
 		this.choiceName = choiceName;
 	}
-	
-	public ChoiceCorrect getChoiceCorrect() {
-		return choiceCorrect;
-	}
-
-	public void setChoiceCorrect(ChoiceCorrect choiceCorrect) {
-		this.choiceCorrect = choiceCorrect;
-	}
 
 	public Date getCreateTime() {
 		return createTime;
@@ -88,4 +85,24 @@ public class Choice {
 		this.question = question;
 	}
 
+	public Question GetQuestion() {
+		return question;
+	}
+
+	public void setChoiceCorrect(ChoiceCorrect choiceCorrect) {
+		this.choiceCorrect = choiceCorrect;
+	}
+	
+	public void setChoiceCorrectCheck(Boolean check) {
+		this.choiceCorrect.setChoiceCorrectCheck(check);
+	}
+
+	public ChoiceCorrect GetChoiceCorrect() {
+		return choiceCorrect;
+	}
+
+	public void removeChoice(Choice choice) {
+		this.choiceCorrect = null;
+		choice.setQuestion(null);
+	}
 }
