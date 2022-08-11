@@ -48,6 +48,7 @@ public class Task {
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "quiz_id")
 	private Quiz quiz;
+	
 
 	public Integer getTaskId() {
 		return taskId;
@@ -112,4 +113,5 @@ public class Task {
 	public void setQuiz(Quiz quiz) {
 		this.quiz = quiz;
 	}
+
 }
