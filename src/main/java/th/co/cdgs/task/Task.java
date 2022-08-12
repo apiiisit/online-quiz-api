@@ -30,7 +30,7 @@ public class Task {
 	private Boolean taskStatus;
 	
 	@Column(name = "task_score")
-	private Float taskScore;
+	private Double taskScore;
 	
 	@Column(name = "task_pass")
 	private String taskPass;
@@ -49,7 +49,6 @@ public class Task {
     @JoinColumn(name = "quiz_id")
 	private Quiz quiz;
 	
-
 	public Integer getTaskId() {
 		return taskId;
 	}
@@ -66,11 +65,11 @@ public class Task {
 		this.taskStatus = taskStatus;
 	}
 
-	public Float getTaskScore() {
+	public Double getTaskScore() {
 		return taskScore;
 	}
 
-	public void setTaskScore(Float taskScore) {
+	public void setTaskScore(Double taskScore) {
 		this.taskScore = taskScore;
 	}
 

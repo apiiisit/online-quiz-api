@@ -19,6 +19,9 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import th.co.cdgs.choice.Choice;
+import th.co.cdgs.question.Question;
+
 
 @Path("task")
 @ApplicationScoped
@@ -62,10 +65,47 @@ public class TaskResource {
         if(!entity.isEmpty()) {
         	throw new WebApplicationException("Can do it once");
         }
-        
         entityManager.persist(task);
         
-        return Response.status(Status.CREATED).entity(entity).build();
+        return Response.noContent().build();
+    }
+    
+    @POST
+    @Path("score")
+    @Transactional
+    public Response checkScore(Integer[][] choiceArr) {
+    	
+    	Double score = 0.0;
+    	
+    	for (Integer[] row : choiceArr) {
+    		Integer questionId = row[0];
+    		Question entity = entityManager.createQuery("FROM Question q WHERE q.questionId = :qId", Question.class)
+    				.setParameter("qId", questionId)
+    				.getSingleResult();
+    		if (entity.getQuestionType().equals("S") && (row.length-1 == 1)) {
+    			for (Choice e : entity.getChoiceArr()) {
+    				if (row[1].equals(e.getChoiceId()) && e.getChoiceCorrect().getChoiceCorrectCheck()) {
+    					score += 1;
+    					break;
+    				}
+    			}
+    		} else if (entity.getQuestionType().equals("M")) {
+    			if (row.length-1 > entity.getChoiceCorrectLength()) {
+    				score -= 1;
+    			} else {
+    				Double rawScore = 0.0;
+    				for (int col=1; col<row.length; col++) {
+    					for (Choice e : entity.getChoiceArr()) {
+    						if (row[col].equals(e.getChoiceId()) && e.getChoiceCorrect().getChoiceCorrectCheck()) {
+    							rawScore += 1;
+    						}
+    					}
+    				}
+    				score += (rawScore / entity.getChoiceCorrectLength());
+    			}
+    		}
+    	}
+        return Response.ok().entity(score).build();
     }
     
     @PUT

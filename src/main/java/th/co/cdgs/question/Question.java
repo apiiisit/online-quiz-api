@@ -60,6 +60,9 @@ public class Question {
 			orphanRemoval = true
 			)
 	private List<Choice> choiceArr;
+	
+	@Column(name = "choice_correct_length")
+	private Integer choiceCorrectLength;
 
 	public Question() {
 		this.choiceArr = new ArrayList<>();
@@ -135,6 +138,14 @@ public class Question {
 
 	public void setChoiceArr(List<Choice> choiceArr) {
 		this.choiceArr = choiceArr;
+	}
+
+	public Integer getChoiceCorrectLength() {
+		return choiceCorrectLength;
+	}
+
+	public void setChoiceCorrectLength(Integer choiceCorrectLength) {
+		this.choiceCorrectLength = choiceCorrectLength;
 	}
 
 }
