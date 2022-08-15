@@ -142,6 +142,7 @@ public class QuestionResource {
         }
         Boolean verified = (question.getQuestionType().equals("S") && verifyCount == 1) || (question.getQuestionType().equals("M") && verifyCount >= 2);
         entity.setVerified(verified);
+        entity.setChoiceCorrectLength(verifyCount);
         
         return Response.ok(entity).build();
     }
