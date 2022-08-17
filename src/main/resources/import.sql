@@ -7,7 +7,7 @@ VALUES (2, 'U', 'user');
 
 -- quiz_user
 INSERT INTO quiz_user (user_id, user_name, first_name, last_name, tel, email, password, profile, create_time, update_time, user_role_id)
-VALUES (1, 'admin', 'Apisit', 'Noiluangchai', '0623439913', 'apiiisit@outlook.com', '207291B1419A721D4D18B23CFBF40EBB', null, sysdate, sysdate, 1);
+VALUES (1, 'admin', 'Apisit', 'Noiluangchai', '0623439913', 'apisitn9244@gmail.com', '207291B1419A721D4D18B23CFBF40EBB', null, sysdate, sysdate, 1);
 --password san
 INSERT INTO quiz_user (user_id, user_name, first_name, last_name, tel, email, password, profile, create_time, update_time, user_role_id)
 VALUES (2, 'tong', 'Wipawee', 'Phattanarach', '0800546884', 'wipawee@outlook.com', '1B29518EE0E136EF49D2A6A54528BC44', 'tong.jpg', sysdate, sysdate, 2);

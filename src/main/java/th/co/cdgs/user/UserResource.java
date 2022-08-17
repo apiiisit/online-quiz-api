@@ -67,6 +67,44 @@ public class UserResource {
         return entity;
     }
     
+    @GET
+    @Path("search")
+    public Response getUserByUsernameAndEmail(@QueryParam("username") String username, @QueryParam("email") String email, @QueryParam("password") String password) throws NoSuchAlgorithmException {
+    	
+    	User entity = entityManager.createQuery("FROM User u WHERE u.userName = :user", User.class)
+    			.setParameter("user", username)
+    			.getSingleResult();
+    	
+        if (entity == null) {
+            throw new WebApplicationException(Status.NOT_FOUND);
+        } else if (!email.isEmpty() && !entity.getEmail().equals(email)) {
+        	throw new WebApplicationException("Email is incorrect.",
+        			Status.NOT_FOUND);
+        } else if (!password.isEmpty() && !checkPassword(password, entity.getPassword())) {
+        	throw new WebApplicationException("Password is incorrect.",
+        			Status.NOT_FOUND);
+        }
+        
+        return Response.ok(entity).build();
+    }
+    
+    @PUT
+    @Path("changePassword")
+    @Transactional
+    public Response changePassword(User user) throws NoSuchAlgorithmException {
+    	User entity = entityManager.createQuery("FROM User u WHERE u.userName = :user", User.class)
+    			.setParameter("user", user.getUserName())
+    			.getSingleResult();
+        if (entity == null) {
+            throw new WebApplicationException("username or email incorrect.",
+                    Status.NOT_FOUND);
+        }
+        entity.setPassword(encodePassword(user.getPassword()));
+        entity.setUpdateTime(new Date());
+        
+        return Response.ok(entity).build();
+    }
+    
     @POST
     @Transactional
     public Response create(User user) throws NoSuchAlgorithmException {
