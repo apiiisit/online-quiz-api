@@ -36,6 +36,7 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
+import th.co.cdgs.counter.Counter;
 import th.co.cdgs.user.role.UserRole;
 
 @Path("user")
@@ -128,6 +129,9 @@ public class UserResource {
         user.setCreateTime(new Date());
         user.setUpdateTime(new Date());
         entityManager.persist(user);
+        
+        Counter counter = entityManager.find(Counter.class, 1);
+        counter.setCounterUser(counter.getCounterUser() + 1);
         
         return Response.status(Status.CREATED).entity(user).build();
     }
@@ -225,6 +229,10 @@ public class UserResource {
                     Status.NOT_FOUND);
         }
         entityManager.remove(entity);
+        
+        Counter counter = entityManager.find(Counter.class, 1);
+        counter.setCounterUser(counter.getCounterUser() - 1);
+        
         return Response.ok().build();
     }
     

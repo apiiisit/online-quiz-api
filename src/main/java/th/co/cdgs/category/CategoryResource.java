@@ -19,6 +19,8 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import th.co.cdgs.counter.Counter;
+
 
 @Path("category")
 @ApplicationScoped
@@ -54,6 +56,9 @@ public class CategoryResource {
         category.setUpdateTime(new Date());
         entityManager.persist(category);
         
+        Counter counter = entityManager.find(Counter.class, 1);
+        counter.setCounterCategory(counter.getCounterCategory() + 1);
+        
         return Response.status(Status.CREATED).entity(category).build();
     }
     
@@ -84,6 +89,10 @@ public class CategoryResource {
                     Status.NOT_FOUND);
         }
         entityManager.remove(entity);
+        
+        Counter counter = entityManager.find(Counter.class, 1);
+        counter.setCounterCategory(counter.getCounterCategory() - 1);
+        
         return Response.ok().build();
     }
 }

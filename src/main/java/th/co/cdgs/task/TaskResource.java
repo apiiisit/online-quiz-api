@@ -20,6 +20,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import th.co.cdgs.choice.Choice;
+import th.co.cdgs.counter.Counter;
 import th.co.cdgs.question.Question;
 
 
@@ -66,6 +67,9 @@ public class TaskResource {
         	throw new WebApplicationException("Can do it once");
         }
         entityManager.persist(task);
+        
+        Counter counter = entityManager.find(Counter.class, 1);
+        counter.setCounterTask(counter.getCounterTask() + 1);
         
         return Response.noContent().build();
     }
@@ -137,6 +141,10 @@ public class TaskResource {
                     Status.NOT_FOUND);
         }
         entityManager.remove(entity);
+        
+        Counter counter = entityManager.find(Counter.class, 1);
+        counter.setCounterTask(counter.getCounterTask() - 1);
+        
         return Response.ok().build();
     }
 }

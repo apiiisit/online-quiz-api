@@ -106,4 +106,6 @@ VALUES (20, 'x = 100, y = 50', 0, sysdate, sysdate, 5);
 --VALUES ('', '', '', '', '', '', '');
 
 
+INSERT INTO counter (counter_id, counter_category, counter_quiz, counter_question, counter_user, counter_task)
+VALUES (1, 2, 2, 5, 3, 0);
 

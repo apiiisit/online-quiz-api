@@ -20,6 +20,8 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import th.co.cdgs.counter.Counter;
+
 
 @Path("quiz")
 @ApplicationScoped
@@ -71,6 +73,9 @@ public class QuizResource {
         quiz.setUpdateTime(new Date());
         entityManager.persist(quiz);
         
+        Counter counter = entityManager.find(Counter.class, 1);
+        counter.setCounterQuiz(counter.getCounterQuiz() + 1);
+        
         return Response.status(Status.CREATED).entity(quiz).build();
     }
     
@@ -114,6 +119,10 @@ public class QuizResource {
                     Status.NOT_FOUND);
         }
         entityManager.remove(entity);
+
+        Counter counter = entityManager.find(Counter.class, 1);
+        counter.setCounterQuiz(counter.getCounterQuiz() - 1);
+        
         return Response.ok().build();
     }
 	
