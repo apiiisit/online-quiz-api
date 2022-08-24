@@ -20,17 +20,29 @@ public class Counter {
 	@Column(name = "counter_category")
 	private Integer counterCategory;
 	
+	@Column(name = "counter_category_active")
+	private Integer counterCategoryActive;
+	
 	@Column(name = "counter_quiz")
 	private Integer counterQuiz;
 	
+	@Column(name = "counter_quiz_active")
+	private Integer counterQuizActive;
+	
 	@Column(name = "counter_question")
 	private Integer counterQuestion;
+
+	@Column(name = "counter_question_active")
+	private Integer counterQuestionActive;
 	
 	@Column(name = "counter_user")
 	private Integer counterUser;
 	
 	@Column(name = "counter_task")
 	private Integer counterTask;
+	
+	@Column(name = "counter_task_status")
+	private Integer counterTaskStatus;
 
 	public Integer getCounterId() {
 		return counterId;
@@ -48,6 +60,14 @@ public class Counter {
 		this.counterCategory = counterCategory;
 	}
 
+	public Integer getCounterCategoryActive() {
+		return counterCategoryActive;
+	}
+
+	public void setCounterCategoryActive(Integer counterCategoryActive) {
+		this.counterCategoryActive = counterCategoryActive;
+	}
+
 	public Integer getCounterQuiz() {
 		return counterQuiz;
 	}
@@ -56,12 +76,28 @@ public class Counter {
 		this.counterQuiz = counterQuiz;
 	}
 
+	public Integer getCounterQuizActive() {
+		return counterQuizActive;
+	}
+
+	public void setCounterQuizActive(Integer counterQuizActive) {
+		this.counterQuizActive = counterQuizActive;
+	}
+
 	public Integer getCounterQuestion() {
 		return counterQuestion;
 	}
 
 	public void setCounterQuestion(Integer counterQuestion) {
 		this.counterQuestion = counterQuestion;
+	}
+
+	public Integer getCounterQuestionActive() {
+		return counterQuestionActive;
+	}
+
+	public void setCounterQuestionActive(Integer counterQuestionActive) {
+		this.counterQuestionActive = counterQuestionActive;
 	}
 
 	public Integer getCounterUser() {
@@ -79,4 +115,15 @@ public class Counter {
 	public void setCounterTask(Integer counterTask) {
 		this.counterTask = counterTask;
 	}
+
+	public Integer getCounterTaskStatus() {
+		return counterTaskStatus;
+	}
+
+	public void setCounterTaskStatus(Integer counterTaskStatus) {
+		this.counterTaskStatus = counterTaskStatus;
+	}
+	
+	
+
 }

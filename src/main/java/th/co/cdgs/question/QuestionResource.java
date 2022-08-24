@@ -55,7 +55,7 @@ public class QuestionResource {
     	
     	String sql = "SELECT q.question_id, q.question_time "
     			+ " FROM Question q "
-    			+ " WHERE q.quiz_id = :quiz_id ";
+    			+ " WHERE q.quiz_id = :quiz_id AND q.verified = true";
     	
     	List<Object[]> objects = entityManager.createNativeQuery(sql).setParameter("quiz_id", quiz).getResultList();
     	List<Integer> q_id = new ArrayList<>();
