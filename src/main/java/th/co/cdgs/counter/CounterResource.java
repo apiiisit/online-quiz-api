@@ -8,8 +8,8 @@ import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
 
 import th.co.cdgs.category.Category;
 import th.co.cdgs.question.Question;
@@ -43,6 +43,24 @@ public class CounterResource {
     	counter.setCounterQuestionActive(question);
     	counter.setCounterTaskStatus(task);
     	return counter;
+    }
+    
+    @GET
+    @Path("{quizId}")
+    public QuizSummary getQuiz(@PathParam("quizId") Integer quizId) {
+    	QuizSummary quizSummary = new QuizSummary();
+    	
+    	List<Task> task = entityManager.createQuery("FROM Task t WHERE t.quiz.quizId = :quizId", Task.class)
+    			.setParameter("quizId", quizId)
+    			.getResultList();
+    	Integer pass = 0;
+    	for (Task t : task) {
+    		pass += t.getTaskStatus() ? 1 : 0;
+    	}
+    	Integer fail = task.size() - pass;
+    	quizSummary.setTaskPass(pass);
+    	quizSummary.setTaskFail(fail);
+    	return quizSummary;
     }
     
 }

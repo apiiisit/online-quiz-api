@@ -1,6 +1,7 @@
 package th.co.cdgs.quiz;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import th.co.cdgs.counter.Counter;
+import th.co.cdgs.task.Task;
 
 
 @Path("quiz")
@@ -40,6 +42,23 @@ public class QuizResource {
     @Path("admin")
     public List<Quiz> getAdmin() {
         return entityManager.createQuery("FROM Quiz", Quiz.class).getResultList();
+    }
+    
+    @GET
+    @Path("admin/check")
+    public List<Quiz> getAdminCheck() {
+        List<Quiz> quiz = entityManager.createQuery("FROM Quiz", Quiz.class).getResultList();
+        List<Integer> quizId = new ArrayList<>();
+        
+        for(Quiz q : quiz) {
+        	List<Task> task = entityManager.createQuery("FROM Task t WHERE t.quiz.quizId = :quizId", Task.class).setParameter("quizId", q.getQuizId()).getResultList();
+        	if (task.size() > 0) {
+        		quizId.add(q.getQuizId());
+        	}
+        }
+        
+        return entityManager.createQuery("FROM Quiz q WHERE q.quizId IN (:quizId)", Quiz.class).setParameter("quizId", quizId).getResultList();
+        
     }
     
     @GET
