@@ -88,6 +88,11 @@ public class QuizResource {
         	quiz.setQuizPassword(generatePassword(6));
         }
         
+        Long start = quiz.getQuizStart().getTime();
+		Date end = new Date();
+		end.setTime(start + (1000 * 60 * quiz.getAverageTestTime()));
+		quiz.setQuizEnd(end);
+        
         quiz.setCreateTime(new Date());
         quiz.setUpdateTime(new Date());
         entityManager.persist(quiz);
@@ -119,9 +124,14 @@ public class QuizResource {
         entity.setQuizPass(quiz.getQuizPass());
         entity.setNumberOfQuestion(quiz.getNumberOfQuestion());
         entity.setQuizStart(quiz.getQuizStart());
-        entity.setQuizEnd(quiz.getQuizEnd());
+        entity.setAverageTestTime(quiz.getAverageTestTime());
         entity.setQuizActive(quiz.getQuizActive());
         entity.setCategory(quiz.getCategory());
+        
+        Long start = quiz.getQuizStart().getTime();
+		Date end = new Date();
+		end.setTime(start + (1000 * 60 * quiz.getAverageTestTime()));
+		entity.setQuizEnd(end);
         
         entity.setUpdateTime(new Date());
         

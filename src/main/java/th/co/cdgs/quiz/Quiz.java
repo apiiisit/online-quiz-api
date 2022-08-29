@@ -43,6 +43,9 @@ public class Quiz {
 	@Column(name = "quiz_end")
 	private Date quizEnd;
 	
+	@Column(name = "average_test_time")
+	private Integer averageTestTime;
+	
 	@Column(name = "quiz_active")
 	private Boolean quizActive;
 	
@@ -113,6 +116,14 @@ public class Quiz {
 
 	public void setQuizEnd(Date quizEnd) {
 		this.quizEnd = quizEnd;
+	}
+
+	public Integer getAverageTestTime() {
+		return averageTestTime;
+	}
+
+	public void setAverageTestTime(Integer averageTestTime) {
+		this.averageTestTime = averageTestTime;
 	}
 
 	public Boolean getQuizActive() {

@@ -24,11 +24,11 @@ INSERT INTO category (category_id, category_name, category_description, category
 VALUES (2, 'Mobile Application Development', null, true, sysdate, sysdate);
 
 -- quiz
-INSERT INTO quiz (quiz_id, quiz_name, quiz_description, quiz_pass, number_of_question, quiz_start, quiz_end, quiz_active, quiz_password, create_time, update_time, category_id)
-VALUES (1, 'Math 1', null, 50, 5, sysdate, sysdate, true, 123456, sysdate, sysdate, 1);
+INSERT INTO quiz (quiz_id, quiz_name, quiz_description, quiz_pass, number_of_question, quiz_start, average_test_time, quiz_active, quiz_password, create_time, update_time, category_id)
+VALUES (1, 'Math 1', null, 50, 5, sysdate, 10, true, 123456, sysdate, sysdate, 1);
 
-INSERT INTO quiz (quiz_id, quiz_name, quiz_description, quiz_pass, number_of_question, quiz_start, quiz_end, quiz_active, quiz_password, create_time, update_time, category_id)
-VALUES (2, 'Mobile 1', null, 50, 5, sysdate, sysdate, true, 123456, sysdate, sysdate, 2);
+INSERT INTO quiz (quiz_id, quiz_name, quiz_description, quiz_pass, number_of_question, quiz_start, average_test_time, quiz_active, quiz_password, create_time, update_time, category_id)
+VALUES (2, 'Mobile 1', null, 50, 5, sysdate, 30, true, 123456, sysdate, sysdate, 2);
 
 -- choice_correct
 INSERT INTO choice_correct (choice_correct_id, choice_correct_check)
@@ -102,24 +102,25 @@ INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, upda
 VALUES (20, 'x = 100, y = 50', 0, sysdate, sysdate, 5);
 
 -- task
-INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
-VALUES (1, true, 5, 50, sysdate, sysdate, 1, 1);
-
-INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
-VALUES (2, true, 5, 50, sysdate, sysdate, 1, 2);
-
-INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
-VALUES (3, false, 5, 50, sysdate, sysdate, 2, 1);
-
-INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
-VALUES (4, false, 0, 50, sysdate, sysdate, 2, 2);
-
-INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
-VALUES (5, false, 5, 50, sysdate, sysdate, 3, 1);
-
-INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
-VALUES (6, true, 0, 50, sysdate, sysdate, 3, 2);
+--INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
+--VALUES (1, true, 5, 50, sysdate, sysdate, 1, 1);
+--
+--INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
+--VALUES (2, true, 5, 50, sysdate, sysdate, 1, 2);
+--
+--INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
+--VALUES (3, false, 5, 50, sysdate, sysdate, 2, 1);
+--
+--INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
+--VALUES (4, false, 0, 50, sysdate, sysdate, 2, 2);
+--
+--INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
+--VALUES (5, false, 5, 50, sysdate, sysdate, 3, 1);
+--
+--INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
+--VALUES (6, true, 0, 50, sysdate, sysdate, 3, 2);
+--
 
 INSERT INTO counter (counter_id, counter_category, counter_quiz, counter_question, counter_user, counter_task)
-VALUES (1, 2, 2, 5, 3, 6);
+VALUES (1, 2, 2, 5, 3, 0);
 
