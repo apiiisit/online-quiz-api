@@ -102,25 +102,25 @@ INSERT INTO choice (choice_id, choice_name, choice_correct_id, create_time, upda
 VALUES (20, 'x = 100, y = 50', 0, sysdate, sysdate, 5);
 
 -- task
---INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
---VALUES (1, true, 5, 50, sysdate, sysdate, 1, 1);
---
---INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
---VALUES (2, true, 5, 50, sysdate, sysdate, 1, 2);
---
---INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
---VALUES (3, false, 5, 50, sysdate, sysdate, 2, 1);
---
---INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
---VALUES (4, false, 0, 50, sysdate, sysdate, 2, 2);
---
---INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
---VALUES (5, false, 5, 50, sysdate, sysdate, 3, 1);
---
---INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
---VALUES (6, true, 0, 50, sysdate, sysdate, 3, 2);
---
+INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
+VALUES (1, true, 5, 50, sysdate, sysdate, 1, 1);
+
+INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
+VALUES (2, true, 5, 50, sysdate, sysdate, 1, 2);
+
+INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
+VALUES (3, false, 5, 50, sysdate, sysdate, 2, 1);
+
+INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
+VALUES (4, false, 0, 50, sysdate, sysdate, 2, 2);
+
+INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
+VALUES (5, false, 5, 50, sysdate, sysdate, 3, 1);
+
+INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
+VALUES (6, true, 0, 50, sysdate, sysdate, 3, 2);
+
 
 INSERT INTO counter (counter_id, counter_category, counter_quiz, counter_question, counter_user, counter_task)
-VALUES (1, 2, 2, 5, 3, 0);
+VALUES (1, 2, 2, 5, 3, 6);
 
