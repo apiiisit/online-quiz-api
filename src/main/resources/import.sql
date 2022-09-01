@@ -103,22 +103,22 @@ VALUES (20, 'x = 100, y = 50', 0, sysdate, sysdate, 5);
 
 -- task
 INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
-VALUES (1, true, 5, 50, sysdate, sysdate, 1, 1);
+VALUES (1, true, 5, '100%', sysdate, sysdate, 1, 1);
 
 INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
-VALUES (2, true, 5, 50, sysdate, sysdate, 1, 2);
+VALUES (2, true, 5, '100%', sysdate, sysdate, 1, 2);
 
 INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
-VALUES (3, false, 5, 50, sysdate, sysdate, 2, 1);
+VALUES (3, false, 2, '40%', sysdate, sysdate, 2, 1);
 
 INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
-VALUES (4, false, 0, 50, sysdate, sysdate, 2, 2);
+VALUES (4, false, 1, '20%', sysdate, sysdate, 2, 2);
 
 INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
-VALUES (5, false, 5, 50, sysdate, sysdate, 3, 1);
+VALUES (5, false, 2, '40%', sysdate, sysdate, 3, 1);
 
 INSERT INTO task (task_id, task_status, task_score, task_pass, task_start, task_finish, user_id, quiz_id)
-VALUES (6, true, 0, 50, sysdate, sysdate, 3, 2);
+VALUES (6, true, 5, '100%', sysdate, sysdate, 3, 2);
 
 
 INSERT INTO counter (counter_id, counter_category, counter_quiz, counter_question, counter_user, counter_task)
