@@ -35,6 +35,8 @@ public class Category {
 	
 	@Column(name = "update_time")
 	private Date updateTime;
+	
+	private Integer quizLength;
 
 	public Integer getCategoryId() {
 		return categoryId;
@@ -83,4 +85,13 @@ public class Category {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
+
+	public Integer getQuizLength() {
+		return quizLength;
+	}
+
+	public void setQuizLength(Integer quizLength) {
+		this.quizLength = quizLength;
+	}
+	
 }

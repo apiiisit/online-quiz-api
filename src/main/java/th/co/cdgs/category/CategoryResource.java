@@ -20,6 +20,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import th.co.cdgs.counter.Counter;
+import th.co.cdgs.quiz.Quiz;
 
 
 @Path("category")

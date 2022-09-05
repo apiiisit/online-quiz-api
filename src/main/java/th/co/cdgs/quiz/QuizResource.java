@@ -21,6 +21,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import th.co.cdgs.category.Category;
 import th.co.cdgs.counter.Counter;
 import th.co.cdgs.task.Task;
 
@@ -41,7 +42,16 @@ public class QuizResource {
     @GET
     @Path("admin")
     public List<Quiz> getAdmin() {
-        return entityManager.createQuery("FROM Quiz", Quiz.class).getResultList();
+        List<Quiz> entity = entityManager.createQuery("FROM Quiz", Quiz.class).getResultList();
+        
+        for (Quiz quiz : entity) {
+			List<Quiz> quizList = entityManager.createQuery("FROM Quiz q WHERE q.category.categoryId = :categoryId", Quiz.class)
+	    			.setParameter("categoryId", quiz.getCategory().getCategoryId())
+	    			.getResultList();
+			quiz.getCategory().setQuizLength(quizList.size());
+		}
+        
+        return entity;
     }
     
     @GET

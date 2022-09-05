@@ -2,21 +2,22 @@ package th.co.cdgs.counter;
 
 public class QuizSummary {
 
-	private Integer TaskPass;
-	private Integer TaskFail;
+	private Integer taskPass;
+	private Integer taskFail;
 	
 	public Integer getTaskPass() {
-		return TaskPass;
+		return taskPass;
 	}
 	public void setTaskPass(Integer taskPass) {
-		TaskPass = taskPass;
+		this.taskPass = taskPass;
 	}
 	public Integer getTaskFail() {
-		return TaskFail;
+		return taskFail;
 	}
 	public void setTaskFail(Integer taskFail) {
-		TaskFail = taskFail;
+		this.taskFail = taskFail;
 	}
+	
 	
 	
 }

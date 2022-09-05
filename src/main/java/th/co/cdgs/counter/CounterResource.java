@@ -62,5 +62,4 @@ public class CounterResource {
     	quizSummary.setTaskFail(fail);
     	return quizSummary;
     }
-    
 }
