@@ -50,6 +50,15 @@ public class CategoryResource {
     @POST
     @Transactional
     public Response create(Category category) {
+    	
+    	List<Category> entity = entityManager.createQuery("FROM Category c WHERE c.categoryName LIKE :name", Category.class)
+    	.setParameter("name", "%"+category.getCategoryName()+"%")
+    	.getResultList();
+    	
+    	if (!entity.isEmpty()) {
+    		return Response.status(Status.CREATED).entity(entity.get(0)).build();
+    	}
+    	
         if (category.getCategoryId() != null) {
         	category.setCategoryId(null);
         }
