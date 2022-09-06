@@ -121,11 +121,9 @@ public class UserResource {
         	throw new WebApplicationException("Already have this username.", Status.OK);
         }
         
-        UserRole role = entityManager.find(UserRole.class, 2);
-        
         user.setUserName(user.getUserName().toLowerCase());
         user.setPassword(encodePassword(user.getPassword()));
-        user.setUserRole(role);
+        user.setUserRole(user.getUserRole());
         user.setCreateTime(new Date());
         user.setUpdateTime(new Date());
         entityManager.persist(user);
