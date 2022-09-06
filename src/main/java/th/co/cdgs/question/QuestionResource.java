@@ -44,6 +44,14 @@ public class QuestionResource {
         return entityManager.createQuery("FROM Question", Question.class).getResultList();
     }
     
+    @GET
+    @Path("admin/{quizId}")
+    public List<Question> getQuestionByQuiz(@PathParam("quizId") Integer quizId) {
+        return entityManager.createQuery("FROM Question q WHERE q.quiz.quizId = :quizId", Question.class)
+        		.setParameter("quizId", quizId)
+        		.getResultList();
+    }
+    
 
     @GET
     @Path("question")
