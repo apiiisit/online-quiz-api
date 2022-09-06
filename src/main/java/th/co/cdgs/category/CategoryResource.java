@@ -62,6 +62,11 @@ public class CategoryResource {
         if (category.getCategoryId() != null) {
         	category.setCategoryId(null);
         }
+        
+        if (category.getCategoryActive() == null) {
+        	category.setCategoryActive(true);
+        }
+        
         category.setCreateTime(new Date());
         category.setUpdateTime(new Date());
         entityManager.persist(category);
