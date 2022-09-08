@@ -24,11 +24,11 @@ INSERT INTO category (category_id, category_name, category_description, category
 VALUES (2, 'Mobile Application Development', null, true, sysdate, sysdate);
 
 -- quiz
-INSERT INTO quiz (quiz_id, quiz_name, quiz_description, quiz_pass, number_of_question, quiz_start, average_test_time, quiz_active, quiz_password, create_time, update_time, category_id)
-VALUES (1, 'Math 1', null, 50, 5, sysdate, 10, true, 123456, sysdate, sysdate, 1);
+INSERT INTO quiz (quiz_id, quiz_name, quiz_description, quiz_pass, number_of_question, quiz_start, quiz_end, average_test_time, quiz_active, quiz_password, create_time, update_time, category_id)
+VALUES (1, 'Math 1', null, 50, 5, sysdate, sysdate, 10, true, 123456, sysdate, sysdate, 1);
 
-INSERT INTO quiz (quiz_id, quiz_name, quiz_description, quiz_pass, number_of_question, quiz_start, average_test_time, quiz_active, quiz_password, create_time, update_time, category_id)
-VALUES (2, 'Mobile 1', null, 50, 5, sysdate, 30, true, 123456, sysdate, sysdate, 2);
+INSERT INTO quiz (quiz_id, quiz_name, quiz_description, quiz_pass, number_of_question, quiz_start, quiz_end, average_test_time, quiz_active, quiz_password, create_time, update_time, category_id)
+VALUES (2, 'Mobile 1', null, 50, 5, sysdate, sysdate, 30, true, 123456, sysdate, sysdate, 2);
 
 -- choice_correct
 INSERT INTO choice_correct (choice_correct_id, choice_correct_check)
