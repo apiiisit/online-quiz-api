@@ -74,7 +74,7 @@ public class QuizResource {
     @GET
     @Path("{id}")
 	public List<Quiz> getByCategoryId(@PathParam("id") Integer id) {
-		return entityManager.createQuery("FROM Quiz q WHERE q.category.categoryId = :id AND quizActive = true", Quiz.class)
+		return entityManager.createQuery("FROM Quiz q WHERE q.category.categoryId = :id AND q.category.categoryActive = true AND quizActive = true", Quiz.class)
 				.setParameter("id", id)
 				.getResultList();
 	}
