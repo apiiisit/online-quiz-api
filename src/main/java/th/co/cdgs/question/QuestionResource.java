@@ -59,22 +59,23 @@ public class QuestionResource {
 		}
 
 		String sql = "SELECT q.question_id, q.question_time " + " FROM Question q "
-				+ " WHERE q.quiz_id = :quiz_id AND q.verified = true";
+				+ " WHERE q.quiz_id = :quiz_id AND q.verified = true "
+				+ " ORDER BY RANDOM() ";
 
 		List<Object[]> objects = entityManager.createNativeQuery(sql).setParameter("quiz_id", quiz).getResultList();
-		List<Integer> q_id = new ArrayList<>();
-		Integer q_time = time;
+		List<Integer> qId = new ArrayList<>();
+		Integer qTime = time;
 
 		for (Object[] object : objects) {
-			if (q_time == 0 || q_id.size() == limit) {
+			if (qTime == 0 || qId.size() == limit) {
 				break;
 			}
-			q_time -= (Integer) object[1];
-			q_id.add((Integer) object[0]);
+			qId.add((Integer) object[0]);
+			qTime -= (Integer) object[1];
 		}
 		List<Question> entitys = entityManager
 				.createQuery("FROM Question q WHERE q.questionId IN (:id) ORDER BY RANDOM()", Question.class)
-				.setParameter("id", q_id).getResultList();
+				.setParameter("id", qId).getResultList();
 		for (Question entity : entitys) {
 			for (Choice choice : entity.getChoiceArr()) {
 				choice.setChoiceCorrect(null);
