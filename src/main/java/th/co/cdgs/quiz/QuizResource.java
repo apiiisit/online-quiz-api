@@ -8,6 +8,7 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -17,11 +18,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import th.co.cdgs.category.Category;
 import th.co.cdgs.counter.Counter;
 import th.co.cdgs.task.Task;
 
@@ -53,6 +54,44 @@ public class QuizResource {
         
         return entity;
     }
+    
+    @GET
+	@Path("filter")
+	public List<Quiz> getFilter(@QueryParam("categoryId") Integer categoryId, @QueryParam("quizId") Integer quizId,
+			@QueryParam("status") Boolean status) {
+		StringBuilder jpql = new StringBuilder("from Quiz q where 1=1 ");
+
+		if (categoryId != null) {
+			jpql.append("and q.category.categoryId = :categoryId ");
+		}
+		if (quizId != null) {
+			jpql.append("and q.quizId = :quizId ");
+		}
+		if (status != null) {
+			jpql.append("and q.quizActive = :status ");
+		}
+
+		Query query = entityManager.createQuery(jpql.toString(), Quiz.class);
+		if (categoryId != null) {
+			query.setParameter("categoryId", categoryId);
+		}
+		if (quizId != null) {
+			query.setParameter("quizId", quizId);
+		}
+		if (status != null) {
+			query.setParameter("status", status);
+		}
+		
+		List<Quiz> entity = query.getResultList();
+		for (Quiz quiz : entity) {
+			List<Quiz> quizList = entityManager.createQuery("FROM Quiz q WHERE q.category.categoryId = :categoryId", Quiz.class)
+	    			.setParameter("categoryId", quiz.getCategory().getCategoryId())
+	    			.getResultList();
+			quiz.getCategory().setQuizLength(quizList.size());
+		}
+		
+		return entity;
+	}
     
     @GET
     @Path("admin/check")
