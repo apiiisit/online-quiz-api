@@ -113,9 +113,25 @@ public class QuizResource {
     @GET
     @Path("{id}")
 	public List<Quiz> getByCategoryId(@PathParam("id") Integer id) {
-		return entityManager.createQuery("FROM Quiz q WHERE q.category.categoryId = :id AND q.category.categoryActive = true AND quizActive = true", Quiz.class)
+    	List<Quiz> entity = entityManager.createQuery("FROM Quiz q WHERE q.category.categoryId = :id AND q.category.categoryActive = true AND quizActive = true", Quiz.class)
 				.setParameter("id", id)
 				.getResultList();
+	
+    	for (Quiz quiz : entity) {
+    		quiz.setQuizPassword(null);
+    	}
+    	
+		return entity;
+	}
+    
+    @POST
+    @Path("auth")
+    @Transactional
+	public Response getPasswordByQuiz(Quiz quiz) {
+    	Quiz entity = entityManager.createQuery("FROM Quiz q WHERE q.quizId = :quizId AND quizActive = true", Quiz.class)
+				.setParameter("quizId", quiz.getQuizId())
+				.getSingleResult();
+    	return Response.ok().entity(entity.getQuizPassword().equals(quiz.getQuizPassword())).build();
 	}
     
     @GET
