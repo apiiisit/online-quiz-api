@@ -44,10 +44,13 @@ public class TaskResource {
 
 	@GET
 	@Path("filter")
-	public List<Task> getFilter(@QueryParam("categoryId") Integer categoryId, @QueryParam("quizId") Integer quizId,
+	public List<Task> getFilter(@QueryParam("fullName") String fullName, @QueryParam("categoryId") Integer categoryId, @QueryParam("quizId") Integer quizId,
 			@QueryParam("status") Boolean status) {
 		StringBuilder jpql = new StringBuilder("from Task t where 1=1 ");
 
+		if (fullName != null) {
+			jpql.append("and LOWER(CONCAT(t.user.firstName, ' ', t.user.lastName)) like :fullName ");
+		}
 		if (categoryId != null) {
 			jpql.append("and t.quiz.category.categoryId = :categoryId ");
 		}
@@ -59,6 +62,9 @@ public class TaskResource {
 		}
 
 		Query query = entityManager.createQuery(jpql.toString(), Task.class);
+		if (fullName != null) {
+			query.setParameter("fullName", '%' + fullName + '%');
+		}
 		if (categoryId != null) {
 			query.setParameter("categoryId", categoryId);
 		}

@@ -24,6 +24,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import th.co.cdgs.counter.Counter;
+import th.co.cdgs.question.Question;
 import th.co.cdgs.task.Task;
 
 
@@ -212,6 +213,15 @@ public class QuizResource {
             throw new WebApplicationException("quiz with id of " + id + " does not exist.",
                     Status.NOT_FOUND);
         }
+        
+        List<Question> questionList = entityManager.createQuery("FROM Question q WHERE q.quiz.quizId = :quizId", Question.class)
+        		.setParameter("quizId", entity.getQuizId())
+        		.getResultList();
+        
+        for (Question question: questionList) {
+        	entityManager.remove(question);
+        }
+        
         entityManager.remove(entity);
 
         Counter counter = entityManager.find(Counter.class, 1);
