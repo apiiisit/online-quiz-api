@@ -37,7 +37,6 @@ import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import th.co.cdgs.counter.Counter;
-import th.co.cdgs.user.role.UserRole;
 
 @Path("user")
 @ApplicationScoped

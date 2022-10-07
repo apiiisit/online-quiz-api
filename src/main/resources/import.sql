@@ -7,14 +7,14 @@ VALUES (2, 'U', 'user');
 
 -- quiz_user
 INSERT INTO quiz_user (user_id, user_name, first_name, last_name, tel, email, password, profile, create_time, update_time, user_role_id)
-VALUES (1, 'admin', 'Apisit', 'Noiluangchai', '0623439913', 'apisitn9244@gmail.com', '207291B1419A721D4D18B23CFBF40EBB', null, sysdate, sysdate, 1);
---password san
+VALUES (1, 'admin', 'Apisit', 'Noiluangchai', '0623439913', 'apisitn9244@gmail.com', 'DACCB74B3B6102F75598B517662DD85F', null, sysdate, sysdate, 1);
+--password admin123
 INSERT INTO quiz_user (user_id, user_name, first_name, last_name, tel, email, password, profile, create_time, update_time, user_role_id)
-VALUES (2, 'tong', 'Wipawee', 'Phattanarach', '0800546884', 'wipawee@outlook.com', '1B29518EE0E136EF49D2A6A54528BC44', 'tong.jpg', sysdate, sysdate, 2);
+VALUES (2, 'tong', 'Wipawee', 'Phatyai', '0800546884', 'wipawee@outlook.com', '1B29518EE0E136EF49D2A6A54528BC44', 'tong.png', sysdate, sysdate, 2);
 --password user
 INSERT INTO quiz_user (user_id, user_name, first_name, last_name, tel, email, password, profile, create_time, update_time, user_role_id)
-VALUES (3, 'san', 'อภิสิทธิ์', 'น้อยหลวงชัย', '0623439913', 'noiluangchai.apisit@gmail.com', 'EDAE5DE839DD806ED5D2FD7D45E3B0DC', 'san.jpg', sysdate, sysdate, 2);
---password 143418
+VALUES (3, 'san', 'อภิสิทธิ์', 'น้อยหลวงชัย', '0623439913', 'apiiisit@outlook.com', '8E57277EF728438139967180DB2EAF1D', 'san.jpg', sysdate, sysdate, 2);
+--password usersan
 
 -- category
 INSERT INTO category (category_id, category_name, category_description, category_active, create_time, update_time)
